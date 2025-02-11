@@ -4,6 +4,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
   datasource:
     url: jdbc:h2:mem:tonycho
     driverClassName: org.h2.Driver
@@ -15,5 +18,6 @@ spring:
   sql:
     init:
       mode: always
+
 #      schema-locations: classpath:sql/schema-project.sql
 #      data-locations: classpath:sql/data-project.sql
