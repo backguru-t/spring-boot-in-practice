@@ -10,6 +10,16 @@ spring:
   h2:
     console:
       enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
-#      schema-locations: classpath:sql/schema-project.sql
-#      data-locations: classpath:sql/data-project.sql
+app:
+  description: Spring Boot Course Tracker API
+  version: V1
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
