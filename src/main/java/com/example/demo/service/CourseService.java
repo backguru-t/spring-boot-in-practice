@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.CourseNotFoundException;
 import com.example.demo.model.Course;
 import com.example.demo.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,15 +30,15 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public void updateCourse(Long id, Course course) {
-        courseRepository.findById(id).ifPresent(dbCourse -> {
-            dbCourse.setName(course.getName());
-            dbCourse.setCategory(course.getCategory());
-            dbCourse.setDescription(course.getDescription());
-            dbCourse.setRating(course.getRating());
+    public Course updateCourse(Long id, Course course) {
+        Course existingCourse = courseRepository.findById(id)
+                .orElseThrow(() -> new CourseNotFoundException(String.format("No course with id %d is available", id)));
+        existingCourse.setName(course.getName());
+        existingCourse.setCategory(course.getCategory());
+        existingCourse.setDescription(course.getDescription());
+        existingCourse.setRating(course.getRating());
 
-            courseRepository.save(dbCourse);
-        });
+        return courseRepository.save(existingCourse);
     }
 
     public void deleteCourses() {
@@ -45,6 +46,8 @@ public class CourseService {
     }
 
     public void deleteCourseById(long id) {
+        courseRepository.findById(id)
+                .orElseThrow(() -> new CourseNotFoundException(String.format("No course with id %d is available", id)));
         courseRepository.deleteById(id);
     }
 
