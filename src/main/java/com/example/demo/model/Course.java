@@ -3,13 +3,9 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Data
 @Entity
 @Table(name = "COURSES")
-@NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
 public class Course {
 
     @Id
@@ -28,12 +24,5 @@ public class Course {
 
     @Column(name = "DESCRIPTION")
     private String description;
-
-    public Course(String name, String category, int rating, String description) {
-        this.name = name;
-        this.category = category;
-        this.rating = rating;
-        this.description = description;
-    }
 
 }
