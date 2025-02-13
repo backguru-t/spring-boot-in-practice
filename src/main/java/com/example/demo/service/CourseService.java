@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.CourseNotFoundException;
-import com.example.demo.model.Course;
-import com.example.demo.repository.CourseRepository;
+import com.example.demo.model.CourseV1;
+import com.example.demo.repository.CourseRepositoryV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,26 +12,26 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CourseService {
 
-    private final CourseRepository courseRepository;
+    private final CourseRepositoryV1 courseRepository;
 
-    public Course createCourse(Course course) {
+    public CourseV1 createCourse(CourseV1 course) {
         return courseRepository.save(course);
     }
 
-    public Optional<Course> getCourseById(long id) {
+    public Optional<CourseV1> getCourseById(long id) {
         return courseRepository.findById(id);
     }
 
-    public Iterable<Course> getCoursesByCategory(String category) {
+    public Iterable<CourseV1> getCoursesByCategory(String category) {
         return courseRepository.findAllByCategory(category);
     }
 
-    public Iterable<Course> getCourses() {
+    public Iterable<CourseV1> getCourses() {
         return courseRepository.findAll();
     }
 
-    public Course updateCourse(Long id, Course course) {
-        Course existingCourse = courseRepository.findById(id)
+    public CourseV1 updateCourse(Long id, CourseV1 course) {
+        CourseV1 existingCourse = courseRepository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(String.format("No course with id %d is available", id)));
         existingCourse.setName(course.getName());
         existingCourse.setCategory(course.getCategory());

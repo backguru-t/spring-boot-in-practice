@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @Entity
 @Table(name = "COURSES")
-public class Course {
+public class CourseV1 {
 
     @Id
     @Column(name = "ID")
